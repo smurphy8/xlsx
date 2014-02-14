@@ -119,26 +119,33 @@ worksheetLensNames =[
 
 
 
-data FullyIndexedCellValue = FICV { ficvSheetIdx :: Int , ficvColIdx ::Int, ficvRowIdx :: Int , ficvValue :: CellValue}
-                             deriving (Read,Show)
+data Cell = Cell { cellIx   :: (Text, Int)
+                 , cellData :: CellData
+                 } 
+          deriving Show
+
+
+data CellData = CellData { cdStyle  :: Maybe Int
+                         , cdValue  :: Maybe CellValue
+                         }
+              deriving Show
+
 
 data CellValue_ t d l = CellText {unCellText :: t} | CellDouble {unCellDouble :: d} | CellLocalTime {unCellLocalTime ::l}
                deriving (Show,Read)
 
 type CellValue = CellValue_ Text Double LocalTime
 
-data Cell = Cell { cellIx   :: (Text, Int)
-                 , cellData :: CellData
-                 } 
-          deriving Show
+
+
+data FullyIndexedCellValue = FICV { ficvSheetIdx :: Int , ficvColIdx ::Int, ficvRowIdx :: Int , ficvValue :: CellValue}
+                             deriving (Read,Show)
+
+
 
 cellLensNames :: [ (String,String)]
 cellLensNames = [("cellIx","lensCellIx"),("cellData","lensCellData")]
 
-data CellData = CellData { cdStyle  :: Maybe Int
-                         , cdValue  :: Maybe CellValue
-                         }
-              deriving Show
 
 
 cellDataLensNames :: [ (String,String)]

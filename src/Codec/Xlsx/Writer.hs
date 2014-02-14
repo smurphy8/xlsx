@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+
 module Codec.Xlsx.Writer (
   writeXlsx,
   writeXlsxStyles
@@ -24,7 +25,6 @@ import           Data.Time.LocalTime
 import           System.Locale
 import           System.Time
 import           Text.XML
-
 import           Codec.Xlsx
 import           Codec.Xlsx.Parser (sheet)
 

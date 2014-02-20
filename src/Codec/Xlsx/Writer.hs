@@ -97,7 +97,7 @@ appXml :: L.ByteString
 appXml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\
 \<Properties xmlns=\"http://schemas.openxmlformats.org/officeDocument/2006/extended-properties\" xmlns:vt=\"http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes\"><TotalTime>0</TotalTime></Properties>"
 
-data XlsxCellData = XlsxSS Int | XlsxDouble Double
+data XlsxCellData = XlsxSS Int | XlsxDouble Double 
 data XlsxCell = XlsxCell{ xlsxCellStyle  :: Maybe Int
                         , xlsxCellValue  :: Maybe XlsxCellData
                         }
@@ -109,6 +109,7 @@ xlsxCellType _ = "n" -- default type, TODO: fix cell output?
 value :: XlsxCell -> Text
 value XlsxCell{xlsxCellValue=Just(XlsxSS i)} = txti i
 value XlsxCell{xlsxCellValue=Just(XlsxDouble d)} = txtd d
+
 value _ = error "value undefined"
 
 
@@ -130,7 +131,8 @@ collectSharedTransform d = transformed
         Just(CellDouble dbl) ->
           return $ XlsxCell s (Just $ XlsxDouble dbl)
         Just(CellLocalTime t) ->
-          return $ XlsxCell s (Just $ XlsxDouble (xlsxDoubleTime t))
+             return $ XlsxCell s (Just $ XlsxDouble (xlsxDoubleTime t))
+
         Nothing ->
           return $ XlsxCell s Nothing
 

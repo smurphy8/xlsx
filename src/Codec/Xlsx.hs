@@ -3,7 +3,6 @@
 {-# LANGUAGE BangPatterns #-}
 {-# Language TemplateHaskell #-}
 
-
 module Codec.Xlsx(
   Xlsx(..),
   WorksheetFile(..),
@@ -29,7 +28,6 @@ module Codec.Xlsx(
   cellLensNames,
   cellDataLensNames,
   mappedSheetLensNames
-  
   ) where
 
 import           Control.Arrow
@@ -85,6 +83,7 @@ type RowHeights = Map Int RowProperties
 data RowProperties = RowProps { rowHeight :: Maybe Double, rowStyle::Maybe Int}
                    deriving (Read,Eq,Show,Ord)
 
+
 newtype MappedSheet = MappedSheet { unMappedSheet :: (IntMap  Worksheet )}
 
 mappedSheetLensNames :: [(String,String)]
@@ -97,7 +96,6 @@ data Worksheet = Worksheet { wsName       :: Text                   -- ^ workshe
                            , wsMaxY       :: Int                    -- ^ maximum non-empty row number (1-based)
                            , wsColumns    :: [ColumnsWidth]         -- ^ column widths
                            , wsRowHeights :: RowHeights             -- ^ custom row height map
-
                            , wsCells      :: Map (Int,Int) CellData -- ^ data mapped by (column, row) pairs
                            , wsMerges     :: [Text]
                            }

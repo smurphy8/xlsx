@@ -2,7 +2,9 @@
 
 module Codec.Xlsx.Writer (
   writeXlsx,
-  writeXlsxStyles
+  writeXlsxStyles,
+  createXlsx,
+  createXlsxStyles
   ) where
 
 import qualified Codec.Archive.Zip as Zip
@@ -27,6 +29,21 @@ import           System.Time
 import           Text.XML
 import           Codec.Xlsx
 import           Codec.Xlsx.Parser (sheet)
+
+
+createXlsx :: Xlsx -> Maybe MappedSheet -> IO L.ByteString
+createXlsx xl@(Xlsx xlA xlS (Styles sty) xlWkfls) Nothing = do
+  xlWshts <- (sheet xl)  `mapM` (zipWith (\a b -> a) [0 ..] xlWkfls)
+  print sty
+  createXlsxStyles sty xlWshts
+createXlsx xl@(Xlsx xlA xlS (Styles sty) xlWkfls) (Just mappedSheets) = do
+  let
+    sheetList :: [Worksheet]
+    sheetList = (snd `fmap`)  (IM.toList.unMappedSheet $ mappedSheets)
+  createXlsxStyles sty sheetList
+
+createXlsxStyles :: L.ByteString -> [Worksheet] -> IO L.ByteString
+createXlsxStyles s d = constructXlsx s d
 
 
 -- | writes list of worksheets

@@ -1,6 +1,6 @@
 Name:                xlsx
 
-Version:             0.0.1.7
+Version:             0.0.1.8
 
 Synopsis:            Simple and incomplete Excel file parser/writer
 Description:
@@ -30,7 +30,7 @@ Library
                     ,transformers
                     ,bytestring
                     ,text
-                    ,lens                     >= 3.2       &&   < 3.9
+                    ,lens                     >= 3.2       &&   < 4.0
                     ,conduit      == 1.0.*
                     ,xml-types    == 0.3.*
                     ,xml-conduit  == 1.1.*

@@ -1,3 +1,4 @@
+
 {-# LANGUAGE NoMonomorphismRestriction #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE BangPatterns #-}
@@ -31,7 +32,7 @@ import qualified Data.ByteString.Lazy as L
 import           Data.ByteString.Lazy.Char8()
 import qualified Control.Monad as Mo
 import qualified Codec.Archive.Zip as Zip
-import           Data.Conduit
+import           Conduit
 import qualified Data.Conduit.List as CL
 import qualified Data.Conduit.Internal as CI
 import           Data.XML.Types
